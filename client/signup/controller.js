@@ -349,6 +349,10 @@ export default {
 			loadExperimentAssignment( 'registration_social_login_first_on_mobile_v3' );
 		}
 
+		if ( isMobile() && 'onboarding' === flowName ) {
+			loadExperimentAssignment( 'calypso_mobile_domains_sidebar_explainer' );
+		}
+
 		context.primary = createElement( SignupComponent, {
 			store: context.store,
 			path: context.path,
