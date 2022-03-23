@@ -529,6 +529,16 @@ export function setIntentOnSite( callback, { siteSlug, intent } ) {
 		} );
 }
 
+export function setVerticalOnSite( callback, { vertical } ) {
+	if ( ! vertical ) {
+		defer( callback );
+		return;
+	}
+
+	// TODO: Send request to update site vertical
+	return Promise.resolve().then( () => callback() );
+}
+
 export function addPlanToCart( callback, dependencies, stepProvidedItems, reduxStore ) {
 	// Note that we pull in emailItem to avoid race conditions from multiple step API functions
 	// trying to fetch and update the cart simultaneously, as both of those actions are asynchronous.

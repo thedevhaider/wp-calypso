@@ -32,6 +32,7 @@ export function generateSteps( {
 	setOptionsOnSite = noop,
 	setStoreFeatures = noop,
 	setIntentOnSite = noop,
+	setVerticalOnSite = noop,
 	addDomainToCart = noop,
 	launchSiteApi = noop,
 	isPlanFulfilled = noop,
@@ -181,6 +182,14 @@ export function generateSteps( {
 			dependencies: [ 'siteSlug', 'siteTitle', 'tagline' ],
 			providesDependencies: [ 'siteTitle', 'tagline' ],
 			apiRequestFunction: setOptionsOnSite,
+			delayApiRequestUntilComplete: true,
+		},
+
+		'site-vertical': {
+			stepName: 'site-vertical',
+			dependencies: [ 'siteSlug', 'vertical' ],
+			providesDependencies: [ 'vertical' ],
+			apiRequestFunction: setVerticalOnSite,
 			delayApiRequestUntilComplete: true,
 		},
 

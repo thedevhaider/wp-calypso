@@ -377,6 +377,7 @@ export function generateFlows( {
 		{
 			name: 'setup-site',
 			steps: [
+				isEnabled( 'signup/site-vertical-step' ) && 'site-vertical',
 				'intent',
 				'site-options',
 				'starting-point',
@@ -384,11 +385,11 @@ export function generateFlows( {
 				'store-options',
 				'store-features',
 				'design-setup-site',
-			],
+			].filter( ( step ) => !! step ),
 			destination: getDestinationFromIntent,
 			description:
 				'Sets up a site that has already been created and paid for (if purchases were made)',
-			lastModified: '2021-10-14',
+			lastModified: '2022-03-23',
 			providesDependenciesInQuery: [ 'siteId', 'siteSlug' ],
 			optionalDependenciesInQuery: [ 'siteId' ],
 			get pageTitle() {
