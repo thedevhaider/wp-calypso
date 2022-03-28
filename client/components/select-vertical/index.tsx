@@ -1,5 +1,6 @@
 import { useTranslate } from 'i18n-calypso';
 import FormLabel from 'calypso/components/forms/form-label';
+import SuggestionSearch from './suggestion-search';
 
 const SelectVertical = () => {
 	const translate = useTranslate();
@@ -7,6 +8,7 @@ const SelectVertical = () => {
 	return (
 		<>
 			<FormLabel>{ translate( 'Select a category' ) }</FormLabel>
+			<SuggestionSearch />
 		</>
 	);
 };

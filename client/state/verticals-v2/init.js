@@ -1,4 +1,5 @@
 import { registerReducer } from 'calypso/state/redux-store';
-import verticalsV2Reducer from './reducer';
+import { allReducer, searchReducer } from './reducer';
 
-registerReducer( [ 'verticals-v2' ], verticalsV2Reducer );
+registerReducer( [ 'verticalsV2All' ], allReducer );
+registerReducer( [ 'verticalsV2' ], searchReducer );
