@@ -1,5 +1,6 @@
 /**
  * @group calypso-pr
+ * @group jetpack
  */
 
 import {
@@ -10,13 +11,15 @@ import {
 	ThemesDetailPage,
 	SiteSelectComponent,
 	TestAccount,
+	getTestAccountByJestGroup,
 } from '@automattic/calypso-e2e';
 import { Browser, Page } from 'playwright';
 
 declare const browser: Browser;
 
 describe( DataHelper.createSuiteTitle( 'Theme: Preview and Activate' ), () => {
-	const testAccount = new TestAccount( 'defaultUser' );
+	const user = getTestAccountByJestGroup();
+	const testAccount = new TestAccount( user );
 	const testAccountSiteDomain = testAccount.getSiteURL( { protocol: false } );
 	let sidebarComponent: SidebarComponent;
 	let themesPage: ThemesPage;
@@ -45,9 +48,8 @@ describe( DataHelper.createSuiteTitle( 'Theme: Preview and Activate' ), () => {
 		}
 	} );
 
-	it( `Search for free theme with keyword ${ themeName }`, async function () {
+	it( `Search for theme with keyword ${ themeName }`, async function () {
 		themesPage = new ThemesPage( page );
-		await themesPage.filterThemes( 'Free' );
 		await themesPage.search( themeName );
 	} );
 
