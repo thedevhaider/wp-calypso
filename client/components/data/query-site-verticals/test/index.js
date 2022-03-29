@@ -1,9 +1,9 @@
 import { shallow } from 'enzyme';
-import { QueryVerticalsV2 } from '../';
+import { QuerySiteVerticals } from '../';
 
-describe( 'QueryVerticalsV2', () => {
+describe( 'QuerySiteVerticals', () => {
 	test( 'should mount as an empty object', () => {
-		const wrapped = shallow( <QueryVerticalsV2 /> );
+		const wrapped = shallow( <QuerySiteVerticals /> );
 
 		expect( wrapped ).toEqual( {} );
 	} );
@@ -11,7 +11,7 @@ describe( 'QueryVerticalsV2', () => {
 	test( 'should call request on mount.', () => {
 		const requestVerticals = jest.fn();
 
-		shallow( <QueryVerticalsV2 requestVerticals={ requestVerticals } searchTerm="Foo" /> );
+		shallow( <QuerySiteVerticals requestVerticals={ requestVerticals } searchTerm="Foo" /> );
 
 		expect( requestVerticals ).toHaveBeenCalled();
 	} );
@@ -19,7 +19,7 @@ describe( 'QueryVerticalsV2', () => {
 	test( 'should not call request on mount if no search term is given.', () => {
 		const requestVerticals = jest.fn();
 
-		shallow( <QueryVerticalsV2 requestVerticals={ requestVerticals } /> );
+		shallow( <QuerySiteVerticals requestVerticals={ requestVerticals } /> );
 
 		expect( requestVerticals ).not.toHaveBeenCalled();
 	} );
@@ -27,7 +27,7 @@ describe( 'QueryVerticalsV2', () => {
 	test( 'should not call request on mount if a matching fetched result is found in state.', () => {
 		const requestVerticals = jest.fn();
 
-		shallow( <QueryVerticalsV2 requestVerticals={ requestVerticals } isFetched={ true } /> );
+		shallow( <QuerySiteVerticals requestVerticals={ requestVerticals } isFetched={ true } /> );
 
 		expect( requestVerticals ).not.toHaveBeenCalled();
 	} );
@@ -35,7 +35,7 @@ describe( 'QueryVerticalsV2', () => {
 	test( 'should call request on update if no matching fetched result is found in state.', () => {
 		const requestVerticals = jest.fn();
 
-		const wrapped = shallow( <QueryVerticalsV2 requestVerticals={ requestVerticals } /> );
+		const wrapped = shallow( <QuerySiteVerticals requestVerticals={ requestVerticals } /> );
 
 		const updatedProps = {
 			searchTerm: 'Foo',
@@ -51,7 +51,7 @@ describe( 'QueryVerticalsV2', () => {
 	test( 'should not call request on update if a matching fetched result is found in state.', () => {
 		const requestVerticals = jest.fn();
 
-		const wrapped = shallow( <QueryVerticalsV2 requestVerticals={ requestVerticals } /> );
+		const wrapped = shallow( <QuerySiteVerticals requestVerticals={ requestVerticals } /> );
 
 		const updatedProps = {
 			searchTerm: 'Foo',
@@ -70,7 +70,7 @@ describe( 'QueryVerticalsV2', () => {
 		const debounceTime = 100;
 
 		shallow(
-			<QueryVerticalsV2
+			<QuerySiteVerticals
 				requestVerticals={ requestVerticals }
 				debounceFunc={ debounceFunc }
 				debounceTime={ debounceTime }
@@ -85,7 +85,7 @@ describe( 'QueryVerticalsV2', () => {
 		const debounceFunc = jest.fn();
 
 		shallow(
-			<QueryVerticalsV2
+			<QuerySiteVerticals
 				requestVerticals={ requestVerticals }
 				debounceFunc={ debounceFunc }
 				debounceTime={ 0 }
@@ -100,7 +100,7 @@ describe( 'QueryVerticalsV2', () => {
 		const debounceFunc = jest.fn();
 
 		const wrapped = shallow(
-			<QueryVerticalsV2
+			<QuerySiteVerticals
 				requestVerticals={ requestVerticals }
 				debounceFunc={ debounceFunc }
 				debounceTime={ 100 }
@@ -122,7 +122,7 @@ describe( 'QueryVerticalsV2', () => {
 		const debounceTime = 100;
 
 		const wrapped = shallow(
-			<QueryVerticalsV2
+			<QuerySiteVerticals
 				requestVerticals={ requestVerticals }
 				debounceFunc={ debounceFunc }
 				debounceTime={ debounceTime }

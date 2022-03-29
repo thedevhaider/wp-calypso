@@ -2,10 +2,10 @@ import { debounce } from 'lodash';
 import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { requestVerticals } from 'calypso/state/verticals-v2/actions';
-import { getVerticals } from 'calypso/state/verticals-v2/selectors';
+import { requestVerticals } from 'calypso/state/site-verticals/actions';
+import { getVerticals } from 'calypso/state/site-verticals/selectors';
 
-export class QueryVerticalsV2 extends Component {
+export class QuerySiteVerticals extends Component {
 	static propTypes = {
 		isFetched: PropTypes.bool,
 		searchTerm: PropTypes.string,
@@ -68,4 +68,4 @@ export default connect(
 	{
 		requestVerticals,
 	}
-)( QueryVerticalsV2 );
+)( QuerySiteVerticals );

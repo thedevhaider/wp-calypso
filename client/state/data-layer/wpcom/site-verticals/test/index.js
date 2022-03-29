@@ -1,9 +1,9 @@
 import { NOTICE_CREATE } from 'calypso/state/action-types';
 import { http } from 'calypso/state/data-layer/wpcom-http/actions';
-import { setVerticals } from 'calypso/state/verticals-v2/suggestions/actions';
+import { setVerticals } from 'calypso/state/site-verticals/actions';
 import { requestVerticals, storeVerticals, showVerticalsRequestError } from '../';
 
-describe( 'data-layer/wpcom/verticals-v2', () => {
+describe( 'data-layer/wpcom/site-verticals', () => {
 	test( 'requestVerticals()', () => {
 		const mockAction = {
 			term: 'Foo',
@@ -15,7 +15,7 @@ describe( 'data-layer/wpcom/verticals-v2', () => {
 				{
 					apiNamespace: 'wpcom/v2',
 					method: 'GET',
-					path: '/verticals/suggest',
+					path: '/site-verticals',
 					query: {
 						term: mockAction.term,
 						limit: mockAction.limit,
@@ -29,8 +29,8 @@ describe( 'data-layer/wpcom/verticals-v2', () => {
 	test( 'storeVerticals()', () => {
 		const term = 'Profit!';
 		const verticals = [
-			{ id: 0, verticalName: 'More Profit!' },
-			{ id: 1, verticalName: 'Superfluous Profit!' },
+			{ id: 0, title: 'More Profit!' },
+			{ id: 1, title: 'Superfluous Profit!' },
 		];
 
 		expect( storeVerticals( { term }, verticals ) ).toEqual( setVerticals( term, verticals ) );

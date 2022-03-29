@@ -1,7 +1,7 @@
-import { VERTICALS_V2_REQUEST, VERTICALS_V2_SET } from 'calypso/state/action-types';
+import { SITE_VERTICALS_REQUEST, SITE_VERTICALS_SET } from 'calypso/state/action-types';
 
-import 'calypso/state/data-layer/wpcom/verticals-v2';
-import 'calypso/state/verticals-v2/init';
+import 'calypso/state/data-layer/wpcom/site-verticals';
+import 'calypso/state/site-verticals/init';
 
 /**
  * Action creator: Request verticals data.
@@ -12,7 +12,7 @@ import 'calypso/state/verticals-v2/init';
  * @returns {object} The action object.
  */
 export const requestVerticals = ( term, limit ) => ( {
-	type: VERTICALS_V2_REQUEST,
+	type: SITE_VERTICALS_REQUEST,
 	term,
 	limit,
 } );
@@ -26,7 +26,7 @@ export const requestVerticals = ( term, limit ) => ( {
  * @returns {object} The action object.
  */
 export const setVerticals = ( term, verticals ) => ( {
-	type: VERTICALS_V2_SET,
+	type: SITE_VERTICALS_SET,
 	term,
 	verticals,
 } );

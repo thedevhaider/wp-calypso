@@ -22,18 +22,6 @@
 		}
 	}
 
-	input.form-text-input {
-		height: 44px;
-		line-height: 44px;
-		border-radius: 4px;
-
-		&:focus,
-		&:focus:hover {
-			border-color: #646970;
-			box-shadow: 0 0 0 2px #e2eaf1;
-		}
-	}
-
 	.form-setting-explanation {
 		display: flex;
 		align-items: center;
