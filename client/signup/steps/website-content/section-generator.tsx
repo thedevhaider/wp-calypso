@@ -1,3 +1,4 @@
+import calypsoConfig from '@automattic/calypso-config';
 import { CONTACT_PAGE } from 'calypso/signup/difm/constants';
 import { WebsiteContent } from 'calypso/state/signup/steps/website-content/schema';
 import { ContactPageDetails } from './contact-page-details';
@@ -10,6 +11,9 @@ import type {
 import type { TranslateResult } from 'i18n-calypso';
 
 const getPageDetailsComponentFromPageId = ( pageId: string ) => {
+	if ( ! calypsoConfig.isEnabled( 'signup/difm-redesigned-flow' ) ) {
+		return PageDetails;
+	}
 	switch ( pageId ) {
 		case CONTACT_PAGE:
 			return ContactPageDetails;
