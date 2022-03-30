@@ -11,14 +11,13 @@ import {
 	ThemesDetailPage,
 	SiteSelectComponent,
 	TestAccount,
-	getTestAccountByJestGroup,
 } from '@automattic/calypso-e2e';
 import { Browser, Page } from 'playwright';
 
 declare const browser: Browser;
 
 describe( DataHelper.createSuiteTitle( 'Theme: Preview and Activate' ), () => {
-	const user = getTestAccountByJestGroup();
+	const user = process.env.TARGET_JETPACK === '1' ? 'jetpackUser' : 'defaultUser';
 	const testAccount = new TestAccount( user );
 	const testAccountSiteDomain = testAccount.getSiteURL( { protocol: false } );
 	let sidebarComponent: SidebarComponent;

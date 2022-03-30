@@ -357,6 +357,7 @@ fun jetpackPlaywrightBuildType( targetDevice: String, buildUuid: String): E2EBui
 				allowEmpty = false
 			)
 			param("env.VIEWPORT_NAME", "$targetDevice")
+			param("env.TARGET_JETPACK", "1")
 		},
 		buildFeatures = {},
 	)
