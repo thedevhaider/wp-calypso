@@ -45,7 +45,11 @@ describe( 'QuerySiteVerticals', () => {
 
 		wrapped.setProps( updatedProps );
 
-		expect( requestVerticals ).toHaveBeenCalledWith( updatedProps.searchTerm, updatedProps.limit );
+		expect( requestVerticals ).toHaveBeenCalledWith(
+			updatedProps.searchTerm,
+			updatedProps.limit,
+			updatedProps.isFetched
+		);
 	} );
 
 	test( 'should not call request on update if a matching fetched result is found in state.', () => {
