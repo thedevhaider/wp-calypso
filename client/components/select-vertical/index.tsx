@@ -3,8 +3,6 @@ import { useCallback } from 'react';
 import { connect } from 'react-redux';
 import QuerySiteVerticals from 'calypso/components/data/query-site-verticals';
 import FormLabel from 'calypso/components/forms/form-label';
-import { setSiteVertical } from 'calypso/state/signup/steps/site-vertical/actions';
-import { getSiteVerticalName } from 'calypso/state/signup/steps/site-vertical/selectors';
 import { getVerticals } from 'calypso/state/site-verticals/selectors';
 import SuggestionSearch from './suggestion-search';
 
@@ -17,24 +15,26 @@ interface Vertical {
 interface Props {
 	suggestions: Vertical[];
 	searchTerm: string;
+	autoFocus: boolean;
 	isLoading: boolean;
 	isSkipSynonyms?: boolean;
-	setSiteVertical?: () => void;
+	onInputChange?: () => void;
 }
 
 const SelectVertical: React.FC< Props > = ( {
 	searchTerm,
 	suggestions,
+	autoFocus,
 	isLoading,
 	isSkipSynonyms,
-	setSiteVertical,
+	onInputChange,
 } ) => {
 	const translate = useTranslate();
 	const handleSuggestionInputChange = useCallback(
 		( term: string ) => {
-			setSiteVertical( { name: term } );
+			onInputChange?.( term );
 		},
-		[ setSiteVertical ]
+		[ onInputChange ]
 	);
 
 	return (
@@ -50,24 +50,18 @@ const SelectVertical: React.FC< Props > = ( {
 				searchTerm={ searchTerm }
 				suggestions={ suggestions }
 				isLoading={ isLoading }
+				autoFocus={ autoFocus } // eslint-disable-line jsx-a11y/no-autofocus
 				onInputChange={ handleSuggestionInputChange }
 			/>
 		</>
 	);
 };
 
-export default connect(
-	( state ) => {
-		const searchTerm = getSiteVerticalName( state );
-		const verticals = getVerticals( state, searchTerm );
+export default connect( ( state, ownProps ) => {
+	const verticals = getVerticals( state, ownProps.searchTerm );
 
-		return {
-			searchTerm,
-			suggestions: verticals || [],
-			isLoading: null === verticals,
-		};
-	},
-	{
-		setSiteVertical,
-	}
-)( SelectVertical );
+	return {
+		suggestions: verticals || [],
+		isLoading: null === verticals,
+	};
+}, null )( SelectVertical );

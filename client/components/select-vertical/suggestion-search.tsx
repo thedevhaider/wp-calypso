@@ -16,7 +16,8 @@ interface Props {
 	placeholder?: string;
 	searchTerm: string;
 	suggestions: Vertical[];
-	isLoading: bool;
+	autoFocus: boolean;
+	isLoading: boolean;
 	onInputChange?: () => void;
 }
 
@@ -24,6 +25,7 @@ const SelectVerticalSuggestionSearch: React.FC< Props > = ( {
 	placeholder,
 	searchTerm,
 	suggestions,
+	autoFocus,
 	isLoading,
 	onInputChange,
 } ) => {
@@ -37,8 +39,12 @@ const SelectVerticalSuggestionSearch: React.FC< Props > = ( {
 	}, [ setIsFocused ] );
 
 	const handleTextInputFocus = useCallback( () => {
+		if ( 0 < suggestions.length ) {
+			setIsShowSuggestions( true );
+		}
+
 		setIsFocused( true );
-	}, [ setIsFocused ] );
+	}, [ suggestions, setIsFocused, setIsShowSuggestions ] );
 
 	const handleTextInputChange = useCallback(
 		( event: React.ChangeEventHandler< HTMLInputElement > ) => {
@@ -97,7 +103,7 @@ const SelectVerticalSuggestionSearch: React.FC< Props > = ( {
 					onChange={ handleTextInputChange }
 					onKeyDown={ handleTextInputKeyDown }
 					autoComplete="off"
-					autoFocus={ true } // eslint-disable-line jsx-a11y/no-autofocus
+					autoFocus={ autoFocus } // eslint-disable-line jsx-a11y/no-autofocus
 				/>
 				<Suggestions
 					className="select-vertical__suggestion-search-dropdown"

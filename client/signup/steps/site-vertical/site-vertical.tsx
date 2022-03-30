@@ -1,24 +1,41 @@
 import { Button } from '@automattic/components';
 import { Icon } from '@wordpress/icons';
 import { useTranslate } from 'i18n-calypso';
-import React from 'react';
+import { useCallback, useState } from 'react';
+import * as React from 'react';
+import { connect } from 'react-redux';
 import FormFieldset from 'calypso/components/forms/form-fieldset';
 import FormSettingExplanation from 'calypso/components/forms/form-setting-explanation';
 import SelectVertical from 'calypso/components/select-vertical';
+import { setSiteVertical } from 'calypso/state/signup/steps/site-vertical/actions';
+import { getSiteVerticalName } from 'calypso/state/signup/steps/site-vertical/selectors';
 import { tip } from '../../icons';
 import './site-vertical.scss';
 
 interface Props {
-	defaultVertical: string;
+	searchTerm: string;
 	isSkipSynonyms?: boolean;
 	onSubmit: ( vertical: string ) => void;
+	setSiteVertical?: () => void;
 }
 
-const SiteVertical: React.FC< Props > = ( { defaultVertical, isSkipSynonyms, onSubmit } ) => {
+const SiteVertical: React.FC< Props > = ( {
+	searchTerm,
+	isSkipSynonyms,
+	onSubmit,
+	setSiteVertical,
+} ) => {
 	const translate = useTranslate();
-	const [ vertical, setVertical ] = React.useState( defaultVertical );
+	const [ vertical, setVertical ] = useState( searchTerm );
 
-	const onSelect = ( value: string ) => {
+	const handleVerticalInputChange = useCallback(
+		( value: string ) => {
+			setSiteVertical( { name: value } );
+		},
+		[ setSiteVertical ]
+	);
+
+	const handleVerticalSelect = ( value: string ) => {
 		setVertical( value );
 	};
 
@@ -31,9 +48,12 @@ const SiteVertical: React.FC< Props > = ( { defaultVertical, isSkipSynonyms, onS
 		<form className="site-vertical__form" onSubmit={ handleSubmit }>
 			<FormFieldset className="site-vertical__form-fieldset">
 				<SelectVertical
+					searchTerm={ searchTerm }
 					selectedVertical={ vertical }
 					isSkipSynonyms={ isSkipSynonyms }
-					onSelect={ onSelect }
+					onInputChange={ handleVerticalInputChange }
+					onSelect={ handleVerticalSelect }
+					autoFocus={ '' === searchTerm } // eslint-disable-line jsx-a11y/no-autofocus
 				/>
 				<FormSettingExplanation>
 					<Icon className="site-vertical__form-icon" icon={ tip } size={ 20 } />
@@ -47,4 +67,11 @@ const SiteVertical: React.FC< Props > = ( { defaultVertical, isSkipSynonyms, onS
 	);
 };
 
-export default SiteVertical;
+export default connect(
+	( state ) => ( {
+		searchTerm: getSiteVerticalName( state ) || '',
+	} ),
+	{
+		setSiteVertical,
+	}
+)( SiteVertical );
