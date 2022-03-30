@@ -360,6 +360,18 @@ fun jetpackPlaywrightBuildType( targetDevice: String, buildUuid: String): E2EBui
 			param("env.TARGET_JETPACK", "1")
 		},
 		buildFeatures = {},
+		buildTriggers = {
+		schedule {
+			schedulingPolicy = daily {
+				hour = 5
+			}
+			branchFilter = """
+				+:trunk
+			""".trimIndent()
+			triggerBuild = always()
+			withPendingChangesOnly = false
+		}
+	}
 	)
 }
 
