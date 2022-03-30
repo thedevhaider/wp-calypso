@@ -9,6 +9,9 @@ import SiteVertical from './site-vertical';
 import './index.scss';
 
 interface Props {
+	queryObject: {
+		skipSynonyms?: boolean;
+	};
 	goToNextStep: () => void;
 	isReskinned: boolean;
 	signupDependencies: any;
@@ -19,7 +22,7 @@ interface Props {
 export default function SiteVerticalStep( props: Props ): React.ReactNode {
 	const dispatch = useDispatch();
 	const translate = useTranslate();
-	const { stepName, signupDependencies, goToNextStep } = props;
+	const { queryObject, stepName, signupDependencies, goToNextStep } = props;
 	const headerText = translate( 'What’s your website about?' );
 	const subHeaderText = translate( 'Choose a category that defines your website the best.' );
 
@@ -46,6 +49,7 @@ export default function SiteVerticalStep( props: Props ): React.ReactNode {
 			stepContent={
 				<SiteVertical
 					defaultVertical={ signupDependencies.vertical }
+					isSkipSynonyms={ Boolean( queryObject.skipSynonyms ) }
 					onSubmit={ submitSiteVertical }
 				/>
 			}

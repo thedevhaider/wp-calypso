@@ -6,22 +6,24 @@ import 'calypso/state/site-verticals/init';
 /**
  * Action creator: Request verticals data.
  *
- * @param {string} term The search term for requesting the matching verticals.
- * @param {number} limit The maximum number of vertical items.
+ * @param {string}  term           The search term for requesting the matching verticals.
+ * @param {number}  limit          The maximum number of vertical items.
+ * @param {boolean} isSkipSynonyms Whether to skip synomyns from results or not.
  *
  * @returns {object} The action object.
  */
-export const requestVerticals = ( term, limit ) => ( {
+export const requestVerticals = ( term, limit, isSkipSynonyms ) => ( {
 	type: SITE_VERTICALS_REQUEST,
 	term,
 	limit,
+	isSkipSynonyms,
 } );
 
 /**
  * Action creator: Store verticals found for a given search term in the state tree.
  *
- * @param {string} term The search term which the verticals data matching with.
- * @param {Array} verticals The verticals data matches with the given search term.
+ * @param {string} term      The search term which the verticals data matching with.
+ * @param {Array}  verticals The verticals data matches with the given search term.
  *
  * @returns {object} The action object.
  */

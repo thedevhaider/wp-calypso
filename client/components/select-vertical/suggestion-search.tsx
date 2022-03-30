@@ -16,15 +16,15 @@ interface Props {
 	placeholder?: string;
 	searchTerm: string;
 	suggestions: Vertical[];
+	isLoading: bool;
 	onInputChange?: () => void;
 }
-
-const MAX_SUGGESTIONS = 5;
 
 const SelectVerticalSuggestionSearch: React.FC< Props > = ( {
 	placeholder,
 	searchTerm,
 	suggestions,
+	isLoading,
 	onInputChange,
 } ) => {
 	const [ isShowSuggestions, setIsShowSuggestions ] = useState( false );
@@ -42,7 +42,7 @@ const SelectVerticalSuggestionSearch: React.FC< Props > = ( {
 
 	const handleTextInputChange = useCallback(
 		( event: React.ChangeEventHandler< HTMLInputElement > ) => {
-			setIsShowSuggestions( 0 < event.target.value.length );
+			setIsShowSuggestions( 0 < event.target.value.trim().length );
 			onInputChange?.( event.target.value );
 		},
 		[ setIsShowSuggestions, onInputChange ]
@@ -68,13 +68,8 @@ const SelectVerticalSuggestionSearch: React.FC< Props > = ( {
 	);
 
 	const getSuggestions = useMemo( () => {
-		if ( ! isShowSuggestions ) {
+		if ( isLoading || ! isShowSuggestions ) {
 			return [];
-		}
-
-		// Show at most MAX_SUGGESTIONS results.
-		if ( MAX_SUGGESTIONS <= suggestions.length ) {
-			return suggestions.slice( 0, MAX_SUGGESTIONS );
 		}
 
 		return suggestions.concat( [
@@ -84,7 +79,7 @@ const SelectVerticalSuggestionSearch: React.FC< Props > = ( {
 				category: 0 < suggestions.length ? '—' : '',
 			},
 		] );
-	}, [ suggestions, isShowSuggestions ] );
+	}, [ suggestions, isLoading, isShowSuggestions ] );
 
 	return (
 		<>

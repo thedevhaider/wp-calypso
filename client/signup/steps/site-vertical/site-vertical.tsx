@@ -10,10 +10,11 @@ import './site-vertical.scss';
 
 interface Props {
 	defaultVertical: string;
+	isSkipSynonyms?: boolean;
 	onSubmit: ( vertical: string ) => void;
 }
 
-const SiteVertical: React.FC< Props > = ( { defaultVertical, onSubmit } ) => {
+const SiteVertical: React.FC< Props > = ( { defaultVertical, isSkipSynonyms, onSubmit } ) => {
 	const translate = useTranslate();
 	const [ vertical, setVertical ] = React.useState( defaultVertical );
 
@@ -29,7 +30,11 @@ const SiteVertical: React.FC< Props > = ( { defaultVertical, onSubmit } ) => {
 	return (
 		<form className="site-vertical__form" onSubmit={ handleSubmit }>
 			<FormFieldset className="site-vertical__form-fieldset">
-				<SelectVertical selectedVertical={ vertical } onSelect={ onSelect } />
+				<SelectVertical
+					selectedVertical={ vertical }
+					isSkipSynonyms={ isSkipSynonyms }
+					onSelect={ onSelect }
+				/>
 				<FormSettingExplanation>
 					<Icon className="site-vertical__form-icon" icon={ tip } size={ 20 } />
 					{ translate( 'We will use this information to guide you towards next steps.' ) }

@@ -17,6 +17,7 @@ export const requestVerticals = ( action ) => {
 			query: {
 				term: action.term.trim(),
 				limit: action.limit,
+				...( action.isSkipSynonyms && { skip_synonyms: action.isSkipSynonyms } ),
 			},
 		},
 		action

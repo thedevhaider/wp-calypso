@@ -15,12 +15,20 @@ interface Vertical {
 }
 
 interface Props {
-	verticals: Vertical[];
+	suggestions: Vertical[];
 	searchTerm: string;
+	isLoading: boolean;
+	isSkipSynonyms?: boolean;
 	setSiteVertical?: () => void;
 }
 
-const SelectVertical: React.FC< Props > = ( { searchTerm, verticals, setSiteVertical } ) => {
+const SelectVertical: React.FC< Props > = ( {
+	searchTerm,
+	suggestions,
+	isLoading,
+	isSkipSynonyms,
+	setSiteVertical,
+} ) => {
 	const translate = useTranslate();
 	const handleSuggestionInputChange = useCallback(
 		( term: string ) => {
@@ -31,12 +39,17 @@ const SelectVertical: React.FC< Props > = ( { searchTerm, verticals, setSiteVert
 
 	return (
 		<>
-			<QuerySiteVerticals searchTerm={ searchTerm } />
+			<QuerySiteVerticals
+				searchTerm={ searchTerm }
+				debounceTime={ 300 }
+				isSkipSynonyms={ isSkipSynonyms }
+			/>
 			<FormLabel>{ translate( 'Select a category' ) }</FormLabel>
 			<SuggestionSearch
 				placeholder={ translate( 'Ex. Cafes, Education, Photography' ) }
 				searchTerm={ searchTerm }
-				suggestions={ verticals }
+				suggestions={ suggestions }
+				isLoading={ isLoading }
 				onInputChange={ handleSuggestionInputChange }
 			/>
 		</>
@@ -46,10 +59,12 @@ const SelectVertical: React.FC< Props > = ( { searchTerm, verticals, setSiteVert
 export default connect(
 	( state ) => {
 		const searchTerm = getSiteVerticalName( state );
+		const verticals = getVerticals( state, searchTerm );
 
 		return {
 			searchTerm,
-			verticals: getVerticals( state, searchTerm ) || [],
+			suggestions: verticals || [],
+			isLoading: null === verticals,
 		};
 	},
 	{
