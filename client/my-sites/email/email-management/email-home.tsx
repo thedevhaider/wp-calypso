@@ -126,6 +126,7 @@ const EmailHome = ( props: EmailManagementHomeProps ): ReactElement => {
 				<EmailProvidersStackedComparisonPage
 					comparisonContext="email-home-selected-domain"
 					selectedDomainName={ selectedDomainName }
+					selectedIntervalLength={ selectedIntervalLength }
 					source={ source }
 				/>
 			);
