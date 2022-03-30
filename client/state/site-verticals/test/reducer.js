@@ -13,6 +13,11 @@ describe( 'state/site-verticals/reducer', () => {
 			{ id: 1, title: 'Tea' },
 		];
 
+		const normalizedVerticals = [
+			{ value: 0, label: 'Coffee', category: 'Suggestions' },
+			{ value: 1, label: 'Tea', category: 'Suggestions' },
+		];
+
 		expect(
 			reducer( undefined, {
 				type: SITE_VERTICALS_SET,
@@ -20,7 +25,7 @@ describe( 'state/site-verticals/reducer', () => {
 				verticals,
 			} )
 		).toEqual( {
-			foo: verticals,
+			foo: normalizedVerticals,
 		} );
 	} );
 } );

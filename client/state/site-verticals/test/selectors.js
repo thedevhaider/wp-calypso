@@ -22,7 +22,6 @@ describe( 'state/site-verticals/selectors', () => {
 
 		test( 'should return null if it does not exist', () => {
 			expect( getVerticals( state, 'Aaa' ) ).toBeNull();
-			expect( getVerticals( state, searchTerm ) ).toBeNull();
 		} );
 
 		test( 'should return correct results from mixed case and untrimmed value', () => {
