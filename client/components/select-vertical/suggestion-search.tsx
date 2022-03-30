@@ -70,7 +70,7 @@ const SelectVerticalSuggestionSearch: React.FC< Props > = ( {
 			setIsShowSuggestions( false );
 			onInputChange?.( suggestion.label );
 		},
-		[ setIsShowSuggestions ]
+		[ setIsShowSuggestions, onInputChange ]
 	);
 
 	const getSuggestions = useMemo( () => {
@@ -85,7 +85,7 @@ const SelectVerticalSuggestionSearch: React.FC< Props > = ( {
 				category: 0 < suggestions.length ? '—' : '',
 			},
 		] );
-	}, [ suggestions, isLoading, isShowSuggestions ] );
+	}, [ translate, suggestions, isLoading, isShowSuggestions ] );
 
 	return (
 		<>

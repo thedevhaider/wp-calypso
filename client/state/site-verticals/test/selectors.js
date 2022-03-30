@@ -17,7 +17,7 @@ describe( 'state/site-verticals/selectors', () => {
 		};
 
 		test( 'should return the stored verticals data.', () => {
-			expect( getVerticals( state, searchTerm ) ).toEqual( state[ siteVerticals ][ searchTerm ] );
+			expect( getVerticals( state, searchTerm ) ).toEqual( state.siteVerticals[ searchTerm ] );
 		} );
 
 		test( 'should return null if it does not exist', () => {
@@ -26,7 +26,7 @@ describe( 'state/site-verticals/selectors', () => {
 		} );
 
 		test( 'should return correct results from mixed case and untrimmed value', () => {
-			expect( getVerticals( state, ' COOL ' ) ).toEqual( state[ siteVerticals ][ searchTerm ] );
+			expect( getVerticals( state, ' COOL ' ) ).toEqual( state.siteVerticals[ searchTerm ] );
 		} );
 	} );
 } );

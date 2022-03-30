@@ -14,15 +14,13 @@ interface Props {
 	};
 	goToNextStep: () => void;
 	isReskinned: boolean;
-	signupDependencies: any;
 	stepName: string;
-	initialContext: any;
 }
 
 export default function SiteVerticalStep( props: Props ): React.ReactNode {
 	const dispatch = useDispatch();
 	const translate = useTranslate();
-	const { queryObject, stepName, signupDependencies, goToNextStep } = props;
+	const { queryObject, stepName, goToNextStep } = props;
 	const headerText = translate( 'What’s your website about?' );
 	const subHeaderText = translate( 'Choose a category that defines your website the best.' );
 
@@ -48,7 +46,6 @@ export default function SiteVerticalStep( props: Props ): React.ReactNode {
 			headerImageUrl={ siteVerticalImage }
 			stepContent={
 				<SiteVertical
-					defaultVertical={ signupDependencies.vertical }
 					isSkipSynonyms={ Boolean( queryObject.skipSynonyms ) }
 					onSubmit={ submitSiteVertical }
 				/>
