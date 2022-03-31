@@ -1,7 +1,7 @@
 import { Button } from '@automattic/components';
 import { Icon } from '@wordpress/icons';
-import { useTranslate } from 'i18n-calypso';
-import { useCallback, useState } from 'react';
+import { TranslateResult, useTranslate } from 'i18n-calypso';
+import { useCallback } from 'react';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import FormFieldset from 'calypso/components/forms/form-fieldset';
@@ -16,7 +16,7 @@ interface Props {
 	searchTerm: string;
 	isSkipSynonyms?: boolean;
 	onSubmit: ( vertical: string ) => void;
-	setSiteVertical?: () => void;
+	setSiteVertical: ( { name: string } ) => void;
 }
 
 const SiteVertical: React.FC< Props > = ( {
@@ -26,22 +26,17 @@ const SiteVertical: React.FC< Props > = ( {
 	setSiteVertical,
 } ) => {
 	const translate = useTranslate();
-	const [ vertical, setVertical ] = useState( searchTerm );
 
 	const handleVerticalInputChange = useCallback(
-		( value: string ) => {
+		( value: TranslateResult | string ) => {
 			setSiteVertical( { name: value } );
 		},
 		[ setSiteVertical ]
 	);
 
-	const handleVerticalSelect = ( value: string ) => {
-		setVertical( value );
-	};
-
 	const handleSubmit = ( event: React.FormEvent ) => {
 		event.preventDefault();
-		onSubmit( vertical );
+		onSubmit( searchTerm );
 	};
 
 	return (
@@ -49,10 +44,8 @@ const SiteVertical: React.FC< Props > = ( {
 			<FormFieldset className="site-vertical__form-fieldset">
 				<SelectVertical
 					searchTerm={ searchTerm }
-					selectedVertical={ vertical }
 					isSkipSynonyms={ isSkipSynonyms }
 					onInputChange={ handleVerticalInputChange }
-					onSelect={ handleVerticalSelect }
 					autoFocus={ '' === searchTerm } // eslint-disable-line jsx-a11y/no-autofocus
 				/>
 				<FormSettingExplanation>

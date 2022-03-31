@@ -1,24 +1,18 @@
 import { Suggestions } from '@automattic/components';
 import classnames from 'classnames';
-import { useTranslate } from 'i18n-calypso';
+import { TranslateResult, useTranslate } from 'i18n-calypso';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import * as React from 'react';
 import FormTextInput from 'calypso/components/forms/form-text-input';
 import './style.scss';
 
-interface Vertical {
-	value: string;
-	label: string;
-	category?: string;
-}
-
 interface Props {
-	placeholder?: string;
+	placeholder?: TranslateResult;
 	searchTerm: string;
 	suggestions: Vertical[];
 	autoFocus: boolean;
 	isLoading: boolean;
-	onInputChange?: () => void;
+	onInputChange?: ( value: TranslateResult | string ) => void;
 }
 
 const SelectVerticalSuggestionSearch: React.FC< Props > = ( {
@@ -47,7 +41,7 @@ const SelectVerticalSuggestionSearch: React.FC< Props > = ( {
 	}, [ suggestions, setIsFocused, setIsShowSuggestions ] );
 
 	const handleTextInputChange = useCallback(
-		( event: React.ChangeEventHandler< HTMLInputElement > ) => {
+		( event: React.ChangeEvent< HTMLInputElement > ) => {
 			setIsShowSuggestions( 0 < event.target.value.trim().length );
 			onInputChange?.( event.target.value );
 		},
@@ -55,7 +49,7 @@ const SelectVerticalSuggestionSearch: React.FC< Props > = ( {
 	);
 
 	const handleTextInputKeyDown = useCallback(
-		( event: React.KeyboardEventHandler< HTMLInputElement > ) => {
+		( event: React.KeyboardEvent< HTMLInputElement > ) => {
 			if ( event.key === 'Enter' ) {
 				event.preventDefault();
 			}
