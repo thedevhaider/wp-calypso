@@ -1,6 +1,5 @@
 import Search from '@automattic/search';
 import { useTranslate } from 'i18n-calypso';
-import page from 'page';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { recordGoogleEvent, recordTracksEvent } from 'calypso/state/analytics/actions';
@@ -29,7 +28,7 @@ const SearchBox = ( { isMobile, doSearch, searchTerm } ) => {
 };
 
 const PopularSearches = ( props ) => {
-	const { searchTerms, siteSlug } = props;
+	const { searchTerms, doSearch } = props;
 	const dispatch = useDispatch();
 	const translate = useTranslate();
 
@@ -50,7 +49,7 @@ const PopularSearches = ( props ) => {
 			} )
 		);
 
-		page( `/plugins/${ siteSlug || '' }?s=${ searchTerm }` );
+		doSearch( searchTerm );
 	};
 
 	return (
@@ -77,8 +76,8 @@ const PopularSearches = ( props ) => {
 	);
 };
 
-const SearchHeader = ( props ) => {
-	const { doSearch, searchTerm, siteSlug, title, searchTerms } = props;
+const SearchBoxHeader = ( props ) => {
+	const { doSearch, searchTerm, title, searchTerms } = props;
 
 	return (
 		<div className="search-box-header">
@@ -86,9 +85,9 @@ const SearchHeader = ( props ) => {
 			<div className="search-box-header__search">
 				<SearchBox doSearch={ doSearch } searchTerm={ searchTerm } />
 			</div>
-			<PopularSearches siteSlug={ siteSlug } searchTerms={ searchTerms } />
+			<PopularSearches doSearch={ doSearch } searchTerms={ searchTerms } />
 		</div>
 	);
 };
 
-export default SearchHeader;
+export default SearchBoxHeader;

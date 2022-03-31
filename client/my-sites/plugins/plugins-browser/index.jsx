@@ -339,7 +339,6 @@ const PluginsBrowser = ( {
 			<SearchBoxHeader
 				doSearch={ doSearch }
 				searchTerm={ search }
-				siteSlug={ siteSlug }
 				title={ translate( 'Plugins you need to get your projects done' ) }
 				searchTerms={ [ 'seo', 'pay', 'booking', 'ecommerce', 'newsletter' ] }
 			/>
