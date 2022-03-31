@@ -621,9 +621,9 @@ __metadata:
     react: ^17.0.2
     react-dom: ^17.0.2
     react-query: ^3.32.1
-    react-redux: ^7.2.6
+    react-redux: ^7.2.7
     redux: ^4.1.2
-    redux-thunk: ^2.3.0
+    redux-thunk: ^2.4.1
     webpack: ^5.68.0
     webpack-bundle-analyzer: ^4.5.0
     webpack-dev-server: ^4.7.3
@@ -671,9 +671,9 @@ __metadata:
     react: ^17.0.2
     react-dom: ^17.0.2
     react-query: ^3.32.1
-    react-redux: ^7.2.6
+    react-redux: ^7.2.7
     redux: ^4.1.2
-    redux-thunk: ^2.3.0
+    redux-thunk: ^2.4.1
     webpack: ^5.68.0
     webpack-bundle-analyzer: ^4.5.0
     webpack-dev-server: ^4.7.3
@@ -974,9 +974,9 @@ __metadata:
     prop-types: ^15.7.2
     react: ^17.0.2
     react-dom: ^17.0.2
-    react-redux: ^7.2.6
+    react-redux: ^7.2.7
     redux: ^4.1.2
-    redux-thunk: ^2.3.0
+    redux-thunk: ^2.4.1
     webpack: ^5.68.0
     webpack-bundle-analyzer: ^4.5.0
     webpack-dev-server: ^4.7.3
@@ -1228,7 +1228,7 @@ __metadata:
     "@wordpress/warning": ^2.2.2
     lodash: ^4.17.21
     redux: ^4.1.2
-    redux-thunk: ^2.3.0
+    redux-thunk: ^2.4.1
     tslib: ^2.3.0
     typescript: ^4.5.5
   languageName: unknown
@@ -12995,7 +12995,7 @@ __metadata:
     react-live: ^2.3.0
     react-modal: ^3.14.3
     react-query: ^3.32.1
-    react-redux: ^7.2.6
+    react-redux: ^7.2.7
     react-router: ^5.1.2
     react-router-dom: ^5.1.2
     react-test-renderer: ^17.0.2
@@ -13005,7 +13005,7 @@ __metadata:
     redux: ^4.1.2
     redux-dynamic-middlewares: ^2.0.0
     redux-mock-store: ^1.5.4
-    redux-thunk: ^2.3.0
+    redux-thunk: ^2.4.1
     regenerator-runtime: ^0.13.9
     sinon: ^12.0.1
     social-logos: ^2.4.0
@@ -30810,9 +30810,9 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"react-redux@npm:^7.2.6":
-  version: 7.2.6
-  resolution: "react-redux@npm:7.2.6"
+"react-redux@npm:^7.2.7":
+  version: 7.2.7
+  resolution: "react-redux@npm:7.2.7"
   dependencies:
     "@babel/runtime": ^7.15.4
     "@types/react-redux": ^7.1.20
@@ -30821,13 +30821,13 @@ fsevents@~2.1.2:
     prop-types: ^15.7.2
     react-is: ^17.0.2
   peerDependencies:
-    react: ^16.8.3 || ^17
+    react: ^16.8.3 || ^17 || ^18
   peerDependenciesMeta:
     react-dom:
       optional: true
     react-native:
       optional: true
-  checksum: f2329642ef6ea95ad9384de08529ded1f836a82098a19f4f09f6afef612d9d5785b4e8aef4f9c9292d3f93812b979f94cd9b8d3aa8747e0a4a10e2600771c3f5
+  checksum: ca52c5bf6a56aabe03cd89bdf366153d40fc5ed591e8dc6bb0ac4b1fa9751c9044363463d256bf3b9d533cdd261eeac266bee0108386972ecb1cca51b0ecaca7
   languageName: node
   linkType: hard
 
@@ -31577,10 +31577,12 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"redux-thunk@npm:^2.3.0":
-  version: 2.3.0
-  resolution: "redux-thunk@npm:2.3.0"
-  checksum: fbf342e56809240af5f41257eee0dbba1b8165b611a1dd96d6d2831f84046e30f037a7e90cbff5636cd6e053d53237c4ed3287403f2c6d28fa1ad26543d7a016
+"redux-thunk@npm:^2.4.1":
+  version: 2.4.1
+  resolution: "redux-thunk@npm:2.4.1"
+  peerDependencies:
+    redux: ^4
+  checksum: 1127090b488c6b368397ed885415553735433b2971bd7d7aee77da398bddcac1c6dbddb0ebef1761d9c2bd59e610877824fad432ade5a4f75132e5bb37387ee7
   languageName: node
   linkType: hard
 
