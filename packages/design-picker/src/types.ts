@@ -3,6 +3,7 @@ import type { ValuesType } from 'utility-types';
 
 export type Font = ValuesType< ValuesType< typeof FONT_PAIRINGS > >;
 
+// Deprecated; used for Gutenboarding (/new flow)
 export interface FontPair {
 	headings: Font;
 	base: Font;
@@ -13,34 +14,32 @@ export interface Category {
 	name: string;
 }
 
+export interface DesignRecipe {
+	theme?: string;
+	pattern_ids?: number[];
+}
+
 export type DesignFeatures = 'anchorfm' | 'difm-lite-default'; // For additional features, = 'anchorfm' | 'feature2' | 'feature3'
 
 export interface Design {
-	categories: Array< Category >;
+	slug: string;
+	title: string;
+	recipe?: DesignRecipe;
+	is_premium: boolean;
+	categories: Category[];
+	features: DesignFeatures[];
+	is_featured_picks?: boolean; // Whether this design will be featured in the sidebar. Example: Blank Canvas
+	showFirst?: boolean; // Whether this design will appear at the top, regardless of category
+
+	/* Deprecated; used for Gutenboarding (/new flow) */
+	stylesheet?: string;
+	template: string;
+	theme: string;
 	fonts?: FontPair;
 	is_alpha?: boolean;
 	is_fse?: boolean;
-	is_premium: boolean;
-	stylesheet?: string;
-	slug: string;
-	template: string;
-	theme: string;
 	preview?: 'static';
-	title: string;
-	features: Array< DesignFeatures >;
-
-	// This design will appear at the top, regardless of category
-	showFirst?: boolean;
-
-	/**
-	 * Quickly hide a design from the picker without having to remove
-	 * it from the list of available design configs (stored in the
-	 * `@automattic/design-picker` package)
-	 */
 	hide?: boolean;
-
-	// designs with a "featured" term in the theme_picks taxonomy
-	is_featured_picks?: boolean;
 }
 
 export interface DesignUrlOptions {
