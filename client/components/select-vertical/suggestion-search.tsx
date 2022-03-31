@@ -4,13 +4,13 @@ import { useTranslate } from 'i18n-calypso';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import * as React from 'react';
 import FormTextInput from 'calypso/components/forms/form-text-input';
-import { Vertical as VerticalType } from './index';
+import type { SiteVerticalsVertical } from 'calypso/data/site-verticals';
 import './style.scss';
 
 interface Props {
 	placeholder?: string;
 	searchTerm: string;
-	suggestions: VerticalType[];
+	suggestions: SiteVerticalsVertical[];
 	autoFocus: boolean;
 	isLoading?: boolean | undefined;
 	onInputChange?: ( value: string ) => void;
