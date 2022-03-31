@@ -1,4 +1,4 @@
-import { TranslateResult, useTranslate } from 'i18n-calypso';
+import { useTranslate } from 'i18n-calypso';
 import { useCallback } from 'react';
 import { connect } from 'react-redux';
 import QuerySiteVerticals from 'calypso/components/data/query-site-verticals';
@@ -8,27 +8,22 @@ import SuggestionSearch from './suggestion-search';
 
 export interface Vertical {
 	value: string;
-	label: TranslateResult | string;
-	category?: string;
-}
-
-export interface Suggestion {
 	label: string;
 	category?: string;
 }
 
 interface Props {
-	suggestions: Vertical[];
+	suggestions?: Vertical[] | undefined;
 	searchTerm: string;
 	autoFocus: boolean;
-	isLoading: boolean;
+	isLoading?: boolean;
 	isSkipSynonyms?: boolean;
-	onInputChange?: ( value: TranslateResult | string ) => void;
+	onInputChange?: ( value: string ) => void;
 }
 
 const SelectVertical: React.FC< Props > = ( {
+	suggestions = [],
 	searchTerm,
-	suggestions,
 	autoFocus,
 	isLoading,
 	isSkipSynonyms,
@@ -36,7 +31,7 @@ const SelectVertical: React.FC< Props > = ( {
 } ) => {
 	const translate = useTranslate();
 	const handleSuggestionInputChange = useCallback(
-		( term: TranslateResult | string ) => {
+		( term: string ) => {
 			onInputChange?.( term );
 		},
 		[ onInputChange ]
@@ -51,7 +46,7 @@ const SelectVertical: React.FC< Props > = ( {
 			/>
 			<FormLabel>{ translate( 'Select a category' ) }</FormLabel>
 			<SuggestionSearch
-				placeholder={ translate( 'Ex. Cafes, Education, Photography' ) }
+				placeholder={ String( translate( 'Ex. Cafes, Education, Photography' ) ) }
 				searchTerm={ searchTerm }
 				suggestions={ suggestions }
 				isLoading={ isLoading }

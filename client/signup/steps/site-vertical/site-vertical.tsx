@@ -1,6 +1,6 @@
 import { Button } from '@automattic/components';
 import { Icon } from '@wordpress/icons';
-import { TranslateResult, useTranslate } from 'i18n-calypso';
+import { useTranslate } from 'i18n-calypso';
 import { useCallback } from 'react';
 import * as React from 'react';
 import { connect } from 'react-redux';
@@ -16,7 +16,7 @@ interface Props {
 	searchTerm: string;
 	isSkipSynonyms?: boolean;
 	onSubmit: ( vertical: string ) => void;
-	setSiteVertical: ( { name: string } ) => void;
+	setSiteVertical: ( { name }: { name: string } ) => void;
 }
 
 const SiteVertical: React.FC< Props > = ( {
@@ -28,7 +28,7 @@ const SiteVertical: React.FC< Props > = ( {
 	const translate = useTranslate();
 
 	const handleVerticalInputChange = useCallback(
-		( value: TranslateResult | string ) => {
+		( value: string ) => {
 			setSiteVertical( { name: value } );
 		},
 		[ setSiteVertical ]

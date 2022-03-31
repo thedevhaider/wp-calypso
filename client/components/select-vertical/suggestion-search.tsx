@@ -1,18 +1,19 @@
 import { Suggestions } from '@automattic/components';
 import classnames from 'classnames';
-import { TranslateResult, useTranslate } from 'i18n-calypso';
+import { useTranslate } from 'i18n-calypso';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import * as React from 'react';
 import FormTextInput from 'calypso/components/forms/form-text-input';
+import { Vertical as VerticalType } from './index';
 import './style.scss';
 
 interface Props {
-	placeholder?: TranslateResult;
+	placeholder?: string;
 	searchTerm: string;
-	suggestions: Vertical[];
+	suggestions: VerticalType[];
 	autoFocus: boolean;
-	isLoading: boolean;
-	onInputChange?: ( value: TranslateResult | string ) => void;
+	isLoading?: boolean | undefined;
+	onInputChange?: ( value: string ) => void;
 }
 
 const SelectVerticalSuggestionSearch: React.FC< Props > = ( {
@@ -60,9 +61,9 @@ const SelectVerticalSuggestionSearch: React.FC< Props > = ( {
 	);
 
 	const handleSuggestionsSelect = useCallback(
-		( suggestion: Vertical ) => {
+		( { label }: { label: string } ) => {
 			setIsShowSuggestions( false );
-			onInputChange?.( suggestion.label );
+			onInputChange?.( label );
 		},
 		[ setIsShowSuggestions, onInputChange ]
 	);
@@ -75,7 +76,7 @@ const SelectVerticalSuggestionSearch: React.FC< Props > = ( {
 		return suggestions.concat( [
 			{
 				value: '',
-				label: translate( 'Something else' ),
+				label: String( translate( 'Something else' ) ),
 				category: 0 < suggestions.length ? '—' : '',
 			},
 		] );
@@ -102,6 +103,7 @@ const SelectVerticalSuggestionSearch: React.FC< Props > = ( {
 				<Suggestions
 					className="select-vertical__suggestion-search-dropdown"
 					ref={ suggestionsRef }
+					title=""
 					query={ searchTerm }
 					suggestions={ getSuggestions }
 					suggest={ handleSuggestionsSelect }

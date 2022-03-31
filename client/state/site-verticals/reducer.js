@@ -7,7 +7,7 @@ function normalize( verticals = [] ) {
 		return {
 			value: vertical.id,
 			label: vertical.title,
-			category: translate( 'Suggestions' ),
+			category: String( translate( 'Suggestions' ) ),
 		};
 	} );
 }
