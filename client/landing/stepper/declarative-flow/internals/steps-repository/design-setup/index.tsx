@@ -6,7 +6,7 @@ import DesignPicker, {
 	PremiumBadge,
 	useCategorization,
 	isBlankCanvasDesign,
-	getDesignUrl,
+	getDesignPreviewUrl,
 	useThemeDesignsQuery,
 } from '@automattic/design-picker';
 import { useLocale, englishLocales } from '@automattic/i18n-utils';
@@ -219,8 +219,8 @@ const designSetup: Step = function DesignSetup( { navigation } ) {
 		const isBlankCanvas = isBlankCanvasDesign( selectedDesign );
 		const designTitle = isBlankCanvas ? translate( 'Blank Canvas' ) : selectedDesign.title;
 		const shouldUpgrade = selectedDesign.is_premium && ! isPremiumThemeAvailable;
-		const previewUrl = getDesignUrl( selectedDesign, locale, {
-			iframe: true,
+		const previewUrl = getDesignPreviewUrl( selectedDesign, {
+			language: locale,
 			// If the user fills out the site title with write intent, we show it on the design preview
 			// Otherwise, use the title of selected design directly
 			site_title: intent === 'write' && siteTitle ? siteTitle : selectedDesign?.title,
