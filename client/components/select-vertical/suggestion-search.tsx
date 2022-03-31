@@ -50,12 +50,14 @@ const SelectVerticalSuggestionSearch: React.FC< Props > = ( {
 	);
 
 	const handleTextInputKeyDown = useCallback(
-		( event: React.KeyboardEvent< HTMLInputElement > ) => {
+		( event: KeyboardEvent ) => {
 			if ( event.key === 'Enter' ) {
 				event.preventDefault();
 			}
 
-			suggestionsRef.current?.handleKeyEvent( event );
+			if ( suggestionsRef.current ) {
+				( suggestionsRef.current as Suggestions ).handleKeyEvent( event );
+			}
 		},
 		[ suggestionsRef ]
 	);

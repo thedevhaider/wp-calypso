@@ -57,7 +57,7 @@ const SelectVertical: React.FC< Props > = ( {
 	);
 };
 
-export default connect( ( state, ownProps ) => {
+export default connect( ( state, ownProps: Props ) => {
 	const verticals = getVerticals( state, ownProps.searchTerm );
 
 	return {
